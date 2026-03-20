@@ -13,4 +13,7 @@ public interface DataMappingRepository extends JpaRepository<DataMapping, Long> 
     Optional<DataMapping> findByEntityNameAndAttributNameAndSourceTypeAndDestinationTypeAndSourceValueEquals(String entityName, String attributName, DataType sourceType, DataType destinationType, String sourceValue);
 
     List<DataMapping> findByEntityNameAndAttributNameAndSourceTypeAndDestinationTypeAndSourceValueLike(String entityName, String attributName, DataType sourceType, DataType destinationType, String sourceValue);
+
+    List<DataMapping> findByEntityNameAndAttributNameAndSourceTypeAndDestinationType(String entityName, String attributName, DataType sourceType, DataType destinationType);
+
 }

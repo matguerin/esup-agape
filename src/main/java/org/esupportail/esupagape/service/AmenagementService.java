@@ -833,7 +833,7 @@ public class AmenagementService {
     }
 
     public List<CodMeae> getCodMeaeList(String amenagementText) {
-        List<DataMapping> dataMappings = dataMappingService.getValues("Amenagement", "amenagementText", DataType.agape, DataType.enquete, amenagementText);
+        List<DataMapping> dataMappings = dataMappingService.getValues("Amenagement", "amenagementText", DataType.agape, DataType.enquete);
         List<CodMeae> codMeaes = new ArrayList<>();
         String[] lignes = amenagementText.split("\\r?\\n");
         for (String line : lignes) {
@@ -841,6 +841,7 @@ public class AmenagementService {
             for (DataMapping dataMapping : dataMappings) {
                 String normalizedKey = normalize(dataMapping.getSourceValue());
                 String pattern = "\\b" + Pattern.quote(normalizedKey) + "\\b";
+                pattern = pattern.replaceAll(" \\.\\* ", " \\\\E.*\\\\Q ");
                 if (normalizedLine.matches(".*" + pattern + ".*")) {
                     codMeaes.add(CodMeae.valueOf(dataMapping.getDestinationValue()));
                 }
